@@ -212,7 +212,6 @@ Vagrant.configure('2') do |config|
     kg.args = "#{ssh_username}"
   end
 
-  config.vm.provision :shell, :path => 'puphpet/shell/install-lxc-dependencies.sh'
   config.vm.provision :shell, :path => 'puphpet/shell/install-ruby.sh'
   config.vm.provision :shell, :path => 'puphpet/shell/install-puppet.sh'
 
