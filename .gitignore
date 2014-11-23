@@ -1,3 +1,7 @@
+# Virtual machine
+/.vagrant/*
+/.puphpet/.config.yaml
+
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*

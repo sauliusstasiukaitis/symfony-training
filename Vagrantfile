@@ -1,9 +1,26 @@
 require 'yaml'
 
+class ::Hash
+    def deep_merge(second)
+        merger = proc { |key, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
+        self.merge(second, &merger)
+    end
+end
+
 dir = File.dirname(File.expand_path(__FILE__))
 
 configValues = YAML.load_file("#{dir}/puphpet/config.yaml")
-data         = configValues['vagrantfile-local']
+data = configValues['vagrantfile-local']
+
+if File.exists?("#{dir}/.puphpet/config.yaml")
+  projectConfigValues = YAML.load_file("#{dir}/.puphpet/config.yaml")
+  data = data.deep_merge projectConfigValues['vagrantfile-local']
+end
+
+if File.exists?("#{dir}/.puphpet/.config.yaml")
+  personalConfigValues = YAML.load_file("#{dir}/.puphpet/.config.yaml")
+  data = data.deep_merge personalConfigValues['vagrantfile-local']
+end
 
 Vagrant.require_version '>= 1.6.0'
 

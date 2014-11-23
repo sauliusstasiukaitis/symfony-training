@@ -1,0 +1,20 @@
+---
+vagrantfile-local:
+    vm:
+        box: puphpet/debian75-x64
+        box_url: puphpet/debian75-x64
+        hostname: 'symfony-training'
+        memory: '2048'
+        cpus: '4'
+        chosen_provider: virtualbox
+        network:
+            private_network: 192.168.56.10
+            forwarded_port:
+                mecWQTatPhNE:
+                    host: '6818'
+                    guest: '22'
+        synced_folder:
+            bHrZB198phbQ:
+                source: ./
+                target: /var/www/shared_www/
+                sync_type: nfs
